@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "198592356764",
+    "project_id": "house-prediction-b",
+    "storage_bucket": "house-prediction-b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:198592356764:android:23ff948c8a10e83799e859",
+        "android_client_info": {
+          "package_name": "com.housepriceprediction"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCC-GTXlnkF1zr-kyAn1XpYW8hzvZghVhY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
