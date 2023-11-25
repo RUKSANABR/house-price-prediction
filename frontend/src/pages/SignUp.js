@@ -7,7 +7,7 @@ import firestore from '@react-native-firebase/firestore'; // Import Firestore
 import firebase from '@react-native-firebase/app';
 
 
-export default function Login({ navigation }) {
+export default function SignUp({ navigation }) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [name, setName] = useState();

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="gcm_defaultSenderId" translatable="false">198592356764</string>
+    <string name="google_api_key" translatable="false">AIzaSyCC-GTXlnkF1zr-kyAn1XpYW8hzvZghVhY</string>
+    <string name="google_app_id" translatable="false">1:198592356764:android:23ff948c8a10e83799e859</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCC-GTXlnkF1zr-kyAn1XpYW8hzvZghVhY</string>
+    <string name="google_storage_bucket" translatable="false">house-prediction-b.appspot.com</string>
+    <string name="project_id" translatable="false">house-prediction-b</string>
+</resources>

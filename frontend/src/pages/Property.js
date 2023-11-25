@@ -108,7 +108,7 @@ const Property = () => {
               source={require('../assets/directions.png')}
               style={styles.boxImage}
             />
-            <Text style={styles.boxText}>{propertyData.Area} sqft</Text>
+            <Text style={styles.boxText}>{propertyData.LotArea} sqft</Text>
           </View>
         </View>
         <Text
@@ -125,147 +125,85 @@ const Property = () => {
         <View
           style={styles.rows}>
           <Text style={styles.text}>
-            Resale: {propertyData.Resale}
+          MSZoning: {propertyData.MSZoning}
           </Text>
           <Text style={styles.text}>
-            MaintenanceStaff: {propertyData.MaintenanceStaff}
+          Street: {propertyData.Street}
             </Text>
         </View>
 
         <View style={styles.rows}>
           <Text style={styles.text}>
-            Gymnasium: {propertyData.Gymnasium}
+          Condition1: {propertyData.Condition1}
           </Text>
           <Text style={styles.text}>
-            SwimmingPool: {propertyData.SwimmingPool}
+          OverallCond: {propertyData.OverallCond}
             </Text>
         </View>
 
         <View style={styles.rows}>
           <Text style={styles.text}>
-            LandscapedGardens: {propertyData.LandscapedGardens}
+          RoofStyle: {propertyData.RoofStyle}
           </Text>
           <Text style={styles.text}>
-            JoggingTrack: {propertyData.JoggingTrack}
+          RoofMatl: {propertyData.RoofMatl}
             </Text>
         </View>
 
         <View style={styles.rows}>
           <Text style={styles.text}>
-            RainWaterHarvesting: {propertyData.RainWaterHarvesting}
+          Foundation: {propertyData.Foundation}
           </Text>
           <Text style={styles.text}>
-            IndoorGames: {propertyData.IndoorGames}
+          BsmtQual: {propertyData.BsmtQual}
             </Text>
         </View>
 
         <View style={styles.rows}>
           <Text style={styles.text}>
-            ShoppingMall: {propertyData.ShoppingMall}
+          Heating: {propertyData.Heating}
           </Text>
           <Text style={styles.text}>
-            InterCom: {propertyData.InterCom}
+          HeatingQC: {propertyData.HeatingQC}
             </Text>
         </View>
 
         <View style={styles.rows}>
           <Text style={styles.text}>
-            sportsFacility: {propertyData.sportsFacility}
+          CentralAir: {propertyData.CentralAir}
           </Text>
           <Text style={styles.text}>
-            ATM: {propertyData.ATM}
+          Electrical: {propertyData.Electrical}
             </Text>
         </View>
 
         <View style={styles.rows}>
           <Text style={styles.text}>
-            ClubHouse: {propertyData.ClubHouse}
+          FullBath: {propertyData.FullBath}
           </Text>
           <Text style={styles.text}>
-            School: {propertyData.School}
+          KitchenQual: {propertyData.KitchenQual}
             </Text>
         </View>
 
         <View style={styles.rows}>
           <Text style={styles.text}>
-            24X7Security: {propertyData.Security}
+          TotRmsAbvGrd: {propertyData.TotRmsAbvGrd}
           </Text>
           <Text style={styles.text}>
-            powerBackup: {propertyData.powerBackup}
+          Functional: {propertyData.Functional}
             </Text>
         </View>
 
         <View style={styles.rows}>
           <Text style={styles.text}>
-            CarParking: {propertyData.CarParking}
+          GarageType: {propertyData.GarageType}
           </Text>
           <Text style={styles.text}>
             StaffQuarter: {propertyData.StaffQuarter}
             </Text>
         </View>
 
-        <View style={styles.rows}>
-          <Text style={styles.text}>
-            Cafteria: {propertyData.Cafteria}
-          </Text>
-          <Text style={styles.text}>
-            MultiPurposeRoom: {propertyData.MultiPurposeRoom}
-            </Text>
-        </View>
-
-        <View style={styles.rows}>
-          <Text style={styles.text}>
-            Hospital: {propertyData.Hospital}
-          </Text>
-          <Text style={styles.text}>
-            WashingMachine: {propertyData.WashingMachine}
-            </Text>
-        </View>
-
-        <View style={styles.rows}>
-          <Text style={styles.text}>
-            GasConnection: {propertyData.GasConnection}
-          </Text>
-          <Text style={styles.text}>
-            AC: {propertyData.AC}
-            </Text>
-        </View>
-
-        <View style={styles.rows}>
-          <Text style={styles.text}>
-            Children'splayarea: {propertyData.Childrenplayarea}
-          </Text>
-          <Text style={styles.text}>
-            Lift Available: {propertyData.LiftAvailable}
-            </Text>
-        </View>
-
-        <View style={styles.rows}>
-          <Text style={styles.text}>
-            BED: {propertyData.Bed}
-          </Text>
-          <Text style={styles.text}>
-            microWaveOwen: {propertyData.Microwave}
-            </Text>
-        </View>
-
-        <View style={styles.rows}>
-          <Text style={styles.text}>
-           TV: {propertyData.TV}
-          </Text>
-          <Text style={styles.text}>
-            Sofa: {propertyData.Sofa}
-            </Text>
-        </View>
-
-        <View style={styles.rows}>
-          <Text style={styles.text}>
-            Wifi: {propertyData.Wifi}
-          </Text>
-          <Text style={styles.text}>
-            Wardrobe: {propertyData.Wardrobe}
-            </Text>
-        </View>
 
         {userD.userType === 'user' ? (
           <TouchableOpacity style={styles.btnsubmit} onPress={onSubmit}>

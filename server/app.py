@@ -15,138 +15,81 @@ app = Flask(__name__)
 def returnAscii():
     d = {}
     inputchr = str(request.args["query"])
-    latitude = str(inputchr).split("|")[0]
-    longitude = str(inputchr).split("|")[1]
-    print(latitude)
-    print(longitude)
+    msZoning = str(inputchr).split("|")[0]
+    lotArea = str(inputchr).split("|")[1]
+    street = str(inputchr).split("|")[2]
+    conditional1 = str(inputchr).split("|")[3]
+    houseStyle = str(inputchr).split("|")[4]
+    overallCond = str(inputchr).split("|")[5]
+    roofStyle = str(inputchr).split("|")[6]
+    roofMat1 = str(inputchr).split("|")[7]
+    foundation = str(inputchr).split("|")[8]
+    bsmtQual = str(inputchr).split("|")[9]
+    heating = str(inputchr).split("|")[10]
+    heatingQC = str(inputchr).split("|")[11]
+    centralAir = str(inputchr).split("|")[12]
+    electrical = str(inputchr).split("|")[13]
+    fullBath = str(inputchr).split("|")[14]
+    kitchenQual = str(inputchr).split("|")[15]
+    totRmsAbvGrd = str(inputchr).split("|")[16]
+    functional = str(inputchr).split("|")[17]
+    garageType = str(inputchr).split("|")[18]
+    print(msZoning)
+    print(lotArea)
 
     # load the model from disk
-    loaded_model = pickle.load(open("housePrice.pkl", "rb"))
 
-    def make_prediction(
-        loaded_model,
-        Area,
-        No_of_Bedrooms,
-        Resale,
-        MaintenanceStaff,
-        Gymnasium,
-        SwimmingPool,
-        LandscapedGardens,
-        JoggingTrack,
-        RainWaterHarvesting,
-        IndoorGames,
-        ShoppingMall,
-        Intercom,
-        SportsFacility,
-        ATM,
-        ClubHouse,
-        School,
-        Security,
-        PowerBackup,
-        CarParking,
-        StaffQuarter,
-        Cafeteria,
-        MultipurposeRoom,
-        Hospital,
-        WashingMachine,
-        Gasconnection,
-        AC,
-        Wifi,
-        playarea,
-        LiftAvailable,
-        BED,
-        VaastuCompliant,
-        Microwave,
-        TV,
-        Sofa,
-        Wardrobe,
-    ):
-        input_data = np.array(
+    pipe = pickle.load(open("Regression.pkl", "rb"))
+
+    input = pd.DataFrame(
+        [
             [
-                Area,
-                No_of_Bedrooms,
-                Resale,
-                MaintenanceStaff,
-                Gymnasium,
-                SwimmingPool,
-                LandscapedGardens,
-                JoggingTrack,
-                RainWaterHarvesting,
-                IndoorGames,
-                ShoppingMall,
-                Intercom,
-                SportsFacility,
-                ATM,
-                ClubHouse,
-                School,
-                Security,
-                PowerBackup,
-                CarParking,
-                StaffQuarter,
-                Cafeteria,
-                MultipurposeRoom,
-                Hospital,
-                WashingMachine,
-                Gasconnection,
-                AC,
-                Wifi,
-                playarea,
-                LiftAvailable,
-                BED,
-                VaastuCompliant,
-                Microwave,
-                TV,
-                Sofa,
-                Wardrobe,
+                "RL",
+                8450,
+                "Pave",
+                "Norm",
+                "2Story",
+                5,
+                "Gable",
+                "CompShg",
+                "PConc",
+                "Gd",
+                "GasA",
+                "Ex",
+                "Y",
+                "SBrkr",
+                2,
+                "Gd",
+                8,
+                "Typ",
+                "Attchd",
             ]
-        ).reshape(1, -1)
-        sc = StandardScaler()
-        x = sc.fit_transform(input_data)
-        prediction = loaded_model.predict(input_data)
-        return prediction.tolist()
-
-    # prediction = make_prediction(loaded_model, temperature, temp_min, temp_max,humidity, rainfall, visibility, windspeed_min, windspeed_max)
-    prediction2 = make_prediction(
-        loaded_model,
-        1126,
-        2,
-        0,
-        0,
-        1,
-        1,
-        1,
-        0,
-        1,
-        1,
-        0,
-        0,
-        0,
-        0,
-        1,
-        0,
-        0,
-        1,
-        0,
-        0,
-        0,
-        1,
-        0,
-        0,
-        0,
-        0,
-        0,
-        1,
-        1,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
+        ],
+        columns=[
+            "MSZoning",
+            "LotArea",
+            "Street",
+            "Condition1",
+            "HouseStyle",
+            "OverallCond",
+            "RoofStyle",
+            "RoofMatl",
+            "Foundation",
+            "BsmtQual",
+            "Heating",
+            "HeatingQC",
+            "CentralAir",
+            "Electrical",
+            "FullBath",
+            "KitchenQual",
+            "TotRmsAbvGrd",
+            "Functional",
+            "GarageType",
+        ],
     )
-    x = [prediction2]
-    print(x)
-    return jsonpickle.encode(x)
+    prediction = pipe.predict(input)[0]
+    print(prediction)
+    return jsonify({"price": prediction})
 
 
 if __name__ == "main":

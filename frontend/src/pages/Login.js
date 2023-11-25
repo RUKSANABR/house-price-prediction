@@ -12,7 +12,7 @@ import {
 import { Avatar } from '@rneui/base';
 import { getAuth, signInWithEmailAndPassword } from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-import firebase from '@react-native-firebase/app';
+
 
 const auth = getAuth(); // Get the authentication object
 
