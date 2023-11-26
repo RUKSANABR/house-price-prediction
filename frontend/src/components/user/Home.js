@@ -54,7 +54,7 @@ const Home = ({ route }) => {
       setPrice(apiPrice);
       console.log("value set");
       console.log(priceProperty);
-      console.log(price);
+      console.log(apiPrice);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -89,7 +89,7 @@ const Home = ({ route }) => {
     };
     console.log(propertyData);
 
-    navigation.navigate('Property', { userprD, propertyData });
+    navigation.navigate('Property', { userD, propertyData });
   };
   height: 40;
   return (
