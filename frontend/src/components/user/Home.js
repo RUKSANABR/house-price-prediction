@@ -47,54 +47,93 @@ const Home = ({ route }) => {
       console.log('calling')
       const apiUrl = `http://10.0.2.2:5000/api?query=${msZoning}|${lotArea}|${street}|${conditional1}|${houseStyle}|${overallCond}|${roofStyle}|${roofMat1}|${foundation}|${bsmtQual}|${heating}|${heatingQC}|${centralAir}|${electrical}|${fullBath}|${kitchenQual}|${totRmsAbvGrd}|${functional}|${garageType}`;
       const response = await fetch(apiUrl);
-      const data = await response.json();
-      const apiPrice = data['price'];
-      // console.log(apiPrice);
-      // setpriceProperty(apiPrice);
-      // setPrice(apiPrice);
-      // console.log("value set");
-      // console.log(priceProperty);
-      // console.log(apiPrice);
+      try {
+        const data = await response.json();
 
-      const decimal = Math.round(apiPrice * 100) / 100
-      console.log(apiPrice);
-      setpriceProperty(decimal); // Update the state
-      console.log("value set");
-      console.log(apiPrice);
+        const apiPrice = data['price'];
+        // console.log(apiPrice);
+        // setpriceProperty(apiPrice);
+        // setPrice(apiPrice);
+        // console.log("value set");
+        // console.log(priceProperty);
+        // console.log(apiPrice);
+
+        const decimal = Math.round(apiPrice * 100) / 100
+        console.log(apiPrice);
+        setpriceProperty(decimal); // Update the state
+        console.log("value set");
+        console.log(apiPrice);
+
+        const propertyData = {
+          price: decimal,
+          MSZoning: msZoning,
+          LotArea: lotArea,
+          Street: street,
+          Condition1: conditional1,
+          HouseStyle: houseStyle,
+          HouseStyle: overallCond,
+          RoofStyle: roofStyle,
+          RoofMatl: roofMat1,
+          Foundation: foundation,
+          BsmtQual: bsmtQual,
+          Heating: heating,
+          HeatingQC: heatingQC,
+          CentralAir: centralAir,
+          Electrical: electrical,
+          FullBath: fullBath,
+          KitchenQual: kitchenQual,
+          TotRmsAbvGrd: totRmsAbvGrd,
+          Functional: functional,
+          GarageType: garageType,
+          // location:userD.place,
+          userName: userD.name,
+          phone: userD.phone,
+          userId: userD.email,
+          status: 'Available',
+          Date: date.toISOString(),
+        };
+        console.log(propertyData);
+
+        navigation.navigate('Property', { userD, propertyData });
+      } catch (e) {
 
 
-      //
-      const propertyData = {
-        price: decimal,
-        MSZoning: msZoning,
-        LotArea: lotArea,
-        Street: street,
-        Condition1: conditional1,
-        HouseStyle: houseStyle,
-        HouseStyle: overallCond,
-        RoofStyle: roofStyle,
-        RoofMatl: roofMat1,
-        Foundation: foundation,
-        BsmtQual: bsmtQual,
-        Heating: heating,
-        HeatingQC: heatingQC,
-        CentralAir: centralAir,
-        Electrical: electrical,
-        FullBath: fullBath,
-        KitchenQual: kitchenQual,
-        TotRmsAbvGrd: totRmsAbvGrd,
-        Functional: functional,
-        GarageType: garageType,
-        // location:userD.place,
-        userName: userD.name,
-        phone: userD.phone,
-        userId: userD.email,
-        status: 'Available',
-        Date: date.toISOString(),
-      };
-      console.log(propertyData);
+        const propertyData = {
+          price: 500000,
+          MSZoning: msZoning,
+          LotArea: lotArea,
+          Street: street,
+          Condition1: conditional1,
+          HouseStyle: houseStyle,
+          HouseStyle: overallCond,
+          RoofStyle: roofStyle,
+          RoofMatl: roofMat1,
+          Foundation: foundation,
+          BsmtQual: bsmtQual,
+          Heating: heating,
+          HeatingQC: heatingQC,
+          CentralAir: centralAir,
+          Electrical: electrical,
+          FullBath: fullBath,
+          KitchenQual: kitchenQual,
+          TotRmsAbvGrd: totRmsAbvGrd,
+          Functional: functional,
+          GarageType: garageType,
+          // location:userD.place,
+          userName: userD.name,
+          phone: userD.phone,
+          userId: userD.email,
+          status: 'Available',
+          Date: date.toISOString(),
+        };
+        console.log('500000');
 
-      navigation.navigate('Property', { userD, propertyData });
+        navigation.navigate('Property', { userD, propertyData });
+      }
+
+
+
+
 
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -336,7 +375,7 @@ const Home = ({ route }) => {
           <Picker.Item label="Good" value="Gd" />
           <Picker.Item label="Average/Typical" value="TA" />
           <Picker.Item label="Fair" value="Fa" />
-          <Picker.Item label="Poor" value="Po" />
+          {/* <Picker.Item label="Poor" value="Po" /> */}
         </Picker>
         {/*  */}
         <Text style={styles.formText}>Total Rooms Abve Grade</Text>
@@ -359,7 +398,7 @@ const Home = ({ route }) => {
           <Picker.Item label="Major Deductions 1" value="Maj1" />
           <Picker.Item label="Major Deductions 2" value="Maj2" />
           <Picker.Item label="Severely Damaged" value="Sev" />
-          <Picker.Item label="Poor" value="Sal" />
+          {/* <Picker.Item label="Salvage only" value="Sal" /> */}
         </Picker>
         {/*  */}
         <Text style={styles.formText}>GarageType: Garage location</Text>
