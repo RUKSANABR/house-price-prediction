@@ -1,17 +1,19 @@
-import {View, Text,StyleSheet,TouchableOpacity} from 'react-native';
-import React,{useState,useEffect} from 'react';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import React, {useState, useEffect} from 'react';
 import firestore from '@react-native-firebase/firestore';
 import {Avatar, Button, Card} from '@rneui/base';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
 export default function PropertyAll(props) {
-  const navigation=useNavigation()
+  const navigation = useNavigation();
   const [data, setData] = useState([]);
   const userD = props.userD;
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const propertyRef = firestore().collection('property').where('status','==','Available');
+        const propertyRef = firestore()
+          .collection('property')
+          .where('status', '==', 'Available');
         const querySnapshot = await propertyRef.get();
         const dataArray = [];
         let docIndex = 0;
@@ -34,58 +36,76 @@ export default function PropertyAll(props) {
   return (
     <View>
       <View style={{marginBottom: 70}}>
-      {data &&
-          data.map((propertyData, index)=>{
+        {data &&
+          data.map((propertyData, index) => {
             // Calculate the number of days ago
             const postedDate = new Date(propertyData.Date);
             const currentDate = new Date();
-            const daysAgo = Math.floor((currentDate - postedDate) / (1000 * 60 * 60 * 24));
-  
+            const daysAgo = Math.floor(
+              (currentDate - postedDate) / (1000 * 60 * 60 * 24),
+            );
+            //
+            const timestamp = new Date(propertyData.Date);
+            const year = timestamp.getFullYear();
+            const month = (timestamp.getMonth() + 1)
+              .toString()
+              .padStart(2, '0'); // Months are zero-based
+            const day = timestamp.getDate().toString().padStart(2, '0');
+            const formattedDate = `${day}-${month}-${year}`;
+            //
+
             return (
               <Card key={index} containerStyle={styles.cards}>
-              <View style={styles.smallCard}>
-             
-              <TouchableOpacity onPress={() =>navigation.navigate('Property', {userD, propertyData})}>
-                <View style={styles.cardContent}>
-                  <Avatar source={require('../../assets/user.png')} size={30} />
-                  <Text style={styles.cardText}>{propertyData.userName}</Text>
-                </View>
-                <View style={styles.cardContent}>
-                  <TouchableOpacity style={styles.btn1}>
-                    <Text style={styles.btnText}>10 jun</Text>
+                <View style={styles.smallCard}>
+                  <TouchableOpacity
+                    onPress={() =>
+                      navigation.navigate('Property', {userD, propertyData})
+                    }>
+                    <View style={styles.cardContent}>
+                      <Avatar
+                        source={require('../../assets/user.png')}
+                        size={30}
+                      />
+                      <Text style={styles.cardText}>
+                        {propertyData.userName}
+                      </Text>
+                    </View>
+                    <View style={styles.cardContent}>
+                      <TouchableOpacity style={styles.btn1}>
+                        <Text style={styles.btnText}>{propertyData.LotArea} sq.ft</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity style={styles.btn1}>
+                        <Text style={styles.btnText}>{ formattedDate}</Text>
+                      </TouchableOpacity>
+                    </View>
+                    <View style={styles.textContent}>
+                      <Text style={{color: 'black'}}>{propertyData.TotRmsAbvGrd} Rooms</Text>
+                      <View style={{flexDirection:'row',alignItems:'center'}}>
+                        <Avatar source={require('../../assets/phone.png')} size={30}/>
+                      <Text style={{color: 'black'}}>
+                         {propertyData.phone}
+                      </Text>
+                      
+                      </View>
+                      <Text style={{textAlign:'justify',color:'black',marginTop:10}}>User wants the help to build house.</Text>
+                    </View>
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.btn1}>
-                    <Text style={styles.btnText}>10 jun</Text>
-                  </TouchableOpacity>
                 </View>
-                <View style={styles.textContent}>
-                  <Text style={{textAlign: 'justify', color: 'black'}}>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book.
-                  </Text>
+                <View
+                  style={[
+                    styles.cardBottomContent,
+                    {justifyContent: 'space-between'},
+                  ]}>
+                  <Text style={styles.cardText}>Posted {daysAgo} days ago</Text>
+                  <Text style={styles.cardText}>₹{propertyData.price}</Text>
                 </View>
-                </TouchableOpacity>
-
-              </View>
-              <View
-                style={[
-                  styles.cardBottomContent,
-                  {justifyContent: 'space-between'},
-                ]}>
-                <Text style={styles.cardText}>Posted {daysAgo} days ago</Text>
-                <Text style={styles.cardText}>₹{propertyData.price}</Text>
-              </View>
-            </Card>
-           );
+              </Card>
+            );
           })}
       </View>
     </View>
   );
-};
-
+}
 
 const styles = StyleSheet.create({
   cards: {
@@ -96,8 +116,8 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 21,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
-    marginBottom:20,
-    alignSelf:'center'
+    marginBottom: 20,
+    alignSelf: 'center',
   },
 
   smallCard: {
@@ -108,7 +128,7 @@ const styles = StyleSheet.create({
     marginTop: -15,
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
-    padding:10
+    padding: 10,
   },
   cardContent: {
     justifyContent: 'flex-start',
@@ -120,7 +140,7 @@ const styles = StyleSheet.create({
     color: 'white',
     padding: 5,
     marginLeft: 10,
-    marginRight:5
+    marginRight: 5,
   },
   btn1: {
     backgroundColor: '#f6f0c1',

@@ -80,6 +80,7 @@ export default function ContracterPage({ navigation, route }) {
 styles = StyleSheet.create({
   container: {
     // backgroundColor:'black'
+    marginBottom:40
   },
   s1: {
     padding: 10,

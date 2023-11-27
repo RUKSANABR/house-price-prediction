@@ -71,7 +71,13 @@ const ContracterDeclined = (props) => {
             const postedDate = new Date(declinedData.property.Date);
             const currentDate = new Date();
             const daysAgo = Math.floor((currentDate - postedDate) / (1000 * 60 * 60 * 24));
-
+            const timestamp = new Date(declinedData.property.Date);
+            const year = timestamp.getFullYear();
+            const month = (timestamp.getMonth() + 1)
+              .toString()
+              .padStart(2, '0'); // Months are zero-based
+            const day = timestamp.getDate().toString().padStart(2, '0');
+            const formattedDate = `${day}-${month}-${year}`;
             return (
               <Card key={index} containerStyle={styles.cards}>
                 <View style={styles.smallCard}>
@@ -83,22 +89,24 @@ const ContracterDeclined = (props) => {
                   </View>
                   <View style={styles.cardContent}>
                     <TouchableOpacity style={styles.btn1}>
-                      <Text style={styles.btnText}>10 jun</Text>
+                      <Text style={styles.btnText}>{declinedData.property.LotArea} sq.ft</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.btn1}>
-                      <Text style={styles.btnText}>10 jun</Text>
+                      <Text style={styles.btnText}>{ formattedDate}</Text>
                     </TouchableOpacity>
                   </View>
 
                   <View style={styles.textContent}>
-                  <Text style={{textAlign: 'justify', color: 'black'}}>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book.
-                  </Text>
-                  </View>
+                  <Text style={{color: 'black'}}>{declinedData.property.TotRmsAbvGrd} Rooms</Text>
+                      <View style={{flexDirection:'row',alignItems:'center'}}>
+                        <Avatar source={require('../../assets/phone.png')} size={30}/>
+                      <Text style={{color: 'black'}}>
+                         {declinedData.property.phone}
+                      </Text>
+                      
+                      </View>
+                      <Text style={{textAlign:'justify',color:'black',marginTop:10}}>User declined your proposal.</Text>
+                    </View>
                 </View>
                 <View
                   style={[

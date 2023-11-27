@@ -49,47 +49,58 @@ const Home = ({ route }) => {
       const response = await fetch(apiUrl);
       const data = await response.json();
       const apiPrice = data['price'];
+      // console.log(apiPrice);
+      // setpriceProperty(apiPrice);
+      // setPrice(apiPrice);
+      // console.log("value set");
+      // console.log(priceProperty);
+      // console.log(apiPrice);
+
+      const decimal = Math.round(apiPrice * 100) / 100
       console.log(apiPrice);
-      setpriceProperty(apiPrice);
-      setPrice(apiPrice);
+      setpriceProperty(decimal); // Update the state
       console.log("value set");
-      console.log(priceProperty);
       console.log(apiPrice);
+
+
+      //
+      const propertyData = {
+        price: decimal,
+        MSZoning: msZoning,
+        LotArea: lotArea,
+        Street: street,
+        Condition1: conditional1,
+        HouseStyle: houseStyle,
+        HouseStyle: overallCond,
+        RoofStyle: roofStyle,
+        RoofMatl: roofMat1,
+        Foundation: foundation,
+        BsmtQual: bsmtQual,
+        Heating: heating,
+        HeatingQC: heatingQC,
+        CentralAir: centralAir,
+        Electrical: electrical,
+        FullBath: fullBath,
+        KitchenQual: kitchenQual,
+        TotRmsAbvGrd: totRmsAbvGrd,
+        Functional: functional,
+        GarageType: garageType,
+        // location:userD.place,
+        userName: userD.name,
+        phone: userD.phone,
+        userId: userD.email,
+        status: 'Available',
+        Date: date.toISOString(),
+      };
+      console.log(propertyData);
+
+      navigation.navigate('Property', { userD, propertyData });
+
     } catch (error) {
       console.error('Error fetching data:', error);
     }
 
-    const propertyData = {
-      price: priceProperty,
-      MSZoning: msZoning,
-      LotArea: lotArea,
-      Street: street,
-      Condition1: conditional1,
-      HouseStyle: houseStyle,
-      HouseStyle: overallCond,
-      RoofStyle: roofStyle,
-      RoofMatl: roofMat1,
-      Foundation: foundation,
-      BsmtQual: bsmtQual,
-      Heating: heating,
-      HeatingQC: heatingQC,
-      CentralAir: centralAir,
-      Electrical: electrical,
-      FullBath: fullBath,
-      KitchenQual: kitchenQual,
-      TotRmsAbvGrd: totRmsAbvGrd,
-      Functional: functional,
-      GarageType: garageType,
-      // location:userD.place,
-      userName: userD.name,
-      phone: userD.phone,
-      userId: userD.email,
-      status: 'Available',
-      Date: date.toISOString(),
-    };
-    console.log(propertyData);
 
-    navigation.navigate('Property', { userD, propertyData });
   };
   height: 40;
   return (
